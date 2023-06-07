@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %} Books Detail {%endblock %}
+
+{% block content %}
+    <div class="row no-gutters">
+        <div class="col-12 col-sm-6 col-md-8">
+            <h1> Books Detail </h1>
+        </div>
+        <div class="col-6 col-md-4">
+          <a class="btn btn-secondary" href="{% url 'books-list' %}">Go Back</a>
+          <a class="btn btn-primary" href="{% url 'books-update' books.pk %}">Update</a>
+          <a class="btn btn-danger" href="{% url 'books-delete' books.pk %}">Delete</a>
+        </div>
+    </div>
+    <ul class="list-group">
+
+        <li class="list-group-item">
+        <div class="row no-gutters">
+          <div class="col-12 col-sm-6 col-md-8">ID : {{ books.id }}</div>
+          <div class="col-12 col-sm-6 col-md-8">Title : {{ books.title }}</div>
+          <div class="col-12 col-sm-6 col-md-8">Subtitle : {{ books.subtitle }}</div>
+          <div class="col-12 col-sm-6 col-md-8">Authors: {{ books.authors }}</div>
+          <div class="col-12 col-sm-6 col-md-8">Publisher : {{ books.publisher }}</div>
+          <div class="col-12 col-sm-6 col-md-8">Published Date: {{ books.published_date }}</div>
+          <div class="col-12 col-sm-6 col-md-8">Category : {{ books.category }}</div>
+
+        </div>
+        </li>
+    </div>
+    </ul>
+{% endblock %}

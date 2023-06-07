@@ -46,6 +46,7 @@ class Dev(Configuration):
         'django.contrib.sessions',
         'django.contrib.messages',
         'django.contrib.staticfiles',
+        # 'import_excel_db',
         'crispy_forms',
         "crispy_bootstrap5",
         'bootstrap5',

@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %} List Category {%endblock %}
+{% block title %} List Books {%endblock %}
 
 {% block content %}
     <h1> Books list </h1>
@@ -9,7 +9,9 @@
     {% for book in books_list %}
         <li class="list-group-item">
         <div class="row no-gutters">
-          <div class="col-12 col-sm-6 col-md-8">{{ book.title }}</div>
+          <div class="col-12 col-sm-6 col-md-8">
+              <a href="{% url 'books-detail' book.pk %}">{{ book.title }}</a>
+          </div>
           <div class="col-6 col-md-4">
               <a class="btn btn-primary" href="{% url 'books-update' book.pk %}">Change</a>
               <a class="btn btn-danger" href="{% url 'books-delete' book.pk %}">Delete</a>

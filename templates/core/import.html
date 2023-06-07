@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %} Import Excel {% endblock %}
+
+{% block content %}
+    {% if success %}
+  <p>Data imported successfully.</p>
+{% endif %}
+
+{% if error %}
+  <p>{{ error }}</p>
+{% endif %}
+
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <input type="file" name="excel_file">
+  <button type="submit">Import</button>
+</form>
+{% endblock %}
