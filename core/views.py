@@ -38,7 +38,7 @@ class ExcelImportView(View):
 
     def import_data(self, df):
         for _, row in df.iterrows():
-            category, created = Category.objects.get_or_create(name=row['category'])
+            category, created = Category.objects.get_or_create(name=row['category'].capitalise())
             obj = Books(
                 id=row['id'],
                 title=row['title'],
@@ -55,6 +55,27 @@ class ExcelImportView(View):
 
 class Index(TemplateView):
     template_name = 'core/index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        queryset = Books.objects.values('category')
+        column_data = [item['category'] for item in queryset]
+        value_counts = {}
+        for value in column_data:
+            if value in value_counts:
+                value_counts[value] += 1
+            else:
+                value_counts[value] = 1
+        # Organize the data for the chart
+        category_name = Category.objects.values()
+        labels = [item['name'] for item in category_name]
+        values = list(value_counts.values())
+
+        # Pass the data to the template
+        context['labels'] = labels
+        context['values'] = values
+        context['total'] = sum(values)
+        return context
 
 
 class AddCategoryView(CreateView):
