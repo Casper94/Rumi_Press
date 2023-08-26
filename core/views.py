@@ -37,20 +37,23 @@ class ExcelImportView(View):
             return render(request, self.template_name, {'error': 'No link or file provided.'})
 
     def import_data(self, df):
-        for _, row in df.iterrows():
-            category, created = Category.objects.get_or_create(name=row['category'].capitalise())
-            obj = Books(
-                id=row['id'],
-                title=row['title'],
-                subtitle=row['subtitle'],
-                authors=row['authors'],
-                publisher=row['publisher'],
-                published_date=row['published_date'],
-                category=category,
-                distribution_expense= row['distribution_expense'],
-            )
+        try:
+            for _, row in df.iterrows():
+                category, created = Category.objects.get_or_create(name=row['category'].capitalize())
+                obj = Books(
+                    id=row['id'],
+                    title=row['title'],
+                    subtitle=row['subtitle'],
+                    authors=row['authors'],
+                    publisher=row['publisher'],
+                    published_date=row['published_date'],
+                    category=category,
+                    distribution_expense= row['distribution_expense'],
+                )
 
-            obj.save()
+                obj.save()
+        except Exception as e:
+            print(e)
 
 
 class Index(TemplateView):
@@ -100,7 +103,7 @@ class ListCategoryView(ListView):
     template_name = 'core/category_list.html'
     context_object_name = 'category_list'
     ordering = ['name']
-    paginate_by = 10
+    paginate_by = 5
 
 
 class UpdateCategoryView(UpdateView):
@@ -148,7 +151,7 @@ class ListBooksView(ListView):
     template_name = 'core/books_list.html'
     context_object_name = 'books_list'
     ordering = ['title']
-    paginate_by = 10
+    paginate_by = 8
 
 
 class DetailBooksView(DetailView):
