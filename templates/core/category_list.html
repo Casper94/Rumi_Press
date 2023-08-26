@@ -9,10 +9,12 @@
         <li class="list-group-item">
         <div class="row no-gutters">
           <div class="col-12 col-sm-6 col-md-8">{{ c }}</div>
-          <div class="col-6 col-md-4">
-              <a class="btn btn-primary" href="{% url 'category-update' c.pk %}">Change</a>
-              <a class="btn btn-danger" href="{% url 'category-delete' c.pk %}">Delete</a>
-          </div>
+            {% if user.is_authenticated %}
+              <div class="col-6 col-md-4">
+                  <a class="btn btn-primary" href="{% url 'category-update' c.pk %}">Change</a>
+                  <a class="btn btn-danger" href="{% url 'category-delete' c.pk %}">Delete</a>
+              </div>
+            {% endif %}
         </div>
         </li>
     {% endfor %}

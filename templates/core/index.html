@@ -74,7 +74,7 @@
                 <!-- /.d-flex -->
 
                 <div class="position-relative mb-4">
-                  <canvas height="200" id="myChart"></canvas>
+                  <canvas height="200" id="barChart"></canvas>
                 </div>
               </div>
             </div>
@@ -91,15 +91,15 @@
 <!-- JavaScript code -->
 <script>
   // Get the canvas element
-  var ctx = document.getElementById('myChart').getContext('2d');
+  var ctx = document.getElementById('barChart').getContext('2d');
 
   // Create the chart
-  var myChart = new Chart(ctx, {
+  var barChart = new Chart(ctx, {
     type: 'bar',
     data: {
       labels: {{ labels|safe }},
       datasets: [{
-        label: 'Data Count',
+        label: 'Books Count by category',
         data: {{ values|safe }},
         backgroundColor: 'rgba(255, 99, 132, 0.2)',
         borderColor: 'rgba(255, 99, 132, 1)',
